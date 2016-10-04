@@ -1,0 +1,46 @@
+1. patients.txt: each row is information of a patient
+	- patnt_refno: a patient's unique ID
+	- UR: another kind of patient's ID
+	- patients' information: date of birth, gender, date of death, language, country,...
+	
+2. admissions.txt: each row is information of an admission
+	- pantnt_refno: patient's ID (the first column in the patients.txt table)
+	- prvsp_refno: unique admission ID
+	- prcae_refno: another kind of unique admission ID
+	- admit_dttm, disch_dttm: the admitted and dispatch time of an admission
+	- admission_method: indicate the admission methods such as: emergency, routine, newborn,...
+	
+3. attendances.txt: each row is information of an emergency attendance:
+	- atd_id: emergency attendance's unique ED key
+	- UR: patient's UR (the second column in the patients.txt table)
+	- arrival_dttm, departure_dttm: the arrival and departure time of an attendance
+	- VEMD_ICD_code: ICD code for the diagnosis of an attendance
+	
+4. medications.txt: each row is information of a medication:
+	- PrescriptionID: a unique ID of the medication
+	- prvsp_refno: admission ID (the second column in the admissions.txt)
+	- UR: patient's UR (the second column in the patients.txt)
+	- Medication Name: names of medications. Each medication should be mapped to it's ATC code. 
+		Medication codes are listed in the file pbs_parsed.txt
+	
+5. diagnosis_procedures.txt: each row is information of a diagnosis or procedure
+	- dgpro_refno: an ID
+	- prcae_refno: prcae_refno of corresponding admission (the third column in the admissions.txt)
+	- dptyp_code: DIAGN stands for diagnosis, PROCE stands for procedure
+	- code: ICD-10 code of diagnosis or procedure. 
+		for diagnosis: file ICD-10-AM-12-13.txt - codes and descriptions of diseases
+				code: the first 3 letters correspond to a type of diseases, the 4th letter corresponds to some versions of a disease.
+				for example: A00 - Cholera disease, A000 - biovar cholerae, A001 - biovar eltor
+
+				file Elixhauser.txt stores the comobidity of disease with 2 columns: ICD-10 code and comorbidity
+
+
+		for procedure: file ICD-10-AM-12-13-procedure.txt - codes and descriptions of procedures
+				code: each code encodes a procedure. A block contains similar procedures
+				for example: 
+					1100000 - Electroencephalography
+					1100900 - Electrocorticography
+					these 2 procedures belong to block 1825 which stands for Electroencephalography [EEG]
+
+				file achi_proc_blocknums.txt contains the descriptions of procedure blocks
+				for example: the description of block 12 is "Biopsy of brain or meninges"
