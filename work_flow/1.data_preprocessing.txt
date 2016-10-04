@@ -1,0 +1,69 @@
+1. Raw preprocess:
+	- Replace '|' -> '\t'
+		raw_preprocess.py
+	inputs: data/raw/*.txt 
+	outputs: data/preprocessed/*.txt
+	
+2. Mapping:
+	- Map medication names -> medication codes
+		map_medi_code.py
+	- Map procedure codes -> procedure blocks
+		map_proc_code.py
+		
+	inputs: 
+		data/preprocessed/medications.txt
+		data/preprocessed/diagnosis_procedures.txt
+	outputs:
+		data/preprocessed/medication_mapped.txt
+		data/preprocessed/diag_proc_block_mapped.txt
+		
+	
+3. 
+	- Cut off levels of diagnosis codes: keep the first 2 letters
+	- Cut off levels of medication codes: keep the first 6 letters
+		cut_off_code.py	
+		
+	inputs:
+		data/preprocessed/medication_mapped.txt
+		data/preprocessed/diag_proc_block_mapped.txt
+		
+	outputs:
+		data/preprocessed/medication_mapped_cutoff.txt
+		data/preprocessed/diag_proc_block_mapped_cutoff.txt
+	
+4. Filter admission: 
+	- Filter out all unusual admissions (admissions starting with one of following characters: R, D, L, M, Q, S, Y)
+	- Filter out all dialysis admissions (not Emergency)
+		filter_adm.py
+		
+	inputs: 
+		data/preprocessed/admissions.txt
+		data/preprocessed/diag_proc_block_mapped_cutoff.txt
+	outputs:
+		data/preprocessed/admissions_filtered.txt
+		data/preprocessed/diag_proc_filtered.txt
+	
+5. Filter & cut off attendance:
+	- Filter out all miss-information attendances
+	- Cut off levels of diagnosis code: keep the first 2 letters
+		filter_cutoff_atd.py
+	
+	inputs:
+		data/preprocessed/attendances.txt
+	outputs:
+		data/preprocessed/atd_filtered.txt
+
+6. Filter patients: remove all duplicated information
+		filter_patients.py
+	input: 
+		data/preprocessed/patients.txt
+	output:
+		data/preprocessed/patnts_filtered.txt
+
+		
+---> Files for creating the dataset: 
+	patnts_filtered.txt
+	admissions_filtered.txt
+	diag_proc_filtered
+	medication_mapped_cutoff.txt
+	atd_filtered.txt

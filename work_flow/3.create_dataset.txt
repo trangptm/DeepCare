@@ -1,0 +1,19 @@
+- Input: 'patnt.pkl', 'adm_pkl'
+	patnt.pkl: contains all information of all patients' admissions.
+		Each row is information of a patient with a list of admissions and a list of attendances.
+
+
+- Randomly create a datasets, each dataset includes train, validation, test sets and an adm dataset
+
+- Readmission prediction:
+	Each data point is a sequence of a patient's admissions. Randomly choose an admission A and cut off all latter ones.
+	Check if in the duration of 1 year (for diabetes) and 3 months (for mental health) after admission A there is any emergency admission. If it is, the label is 1, otherwise 0.
+	
+- Next diagnosis prediction
+	Sequence mapping: from a sequence of admissions -> sequence of outputs, each output is a set of next diagnoses.
+
+- High risk prediction:
+	Same as readmission prediction. Output is 1 if after 1 year (for diabetes) and 3 months (for mental health) of discharge, the patient have at least 3 emergency readmissions.
+
+- Current interventions:
+	Same as Next diagnosis prediction

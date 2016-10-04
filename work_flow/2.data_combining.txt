@@ -1,0 +1,43 @@
+Files for creating datasets:
+	patnts_filtered.txt
+	admissions_filtered.txt
+	diag_proc_filtered
+	medication_mapped_cutoff.txt
+	atd_filtered.txt
+
+I. CREATE ADM DATASET AND ATD DATASET	
+Brief description:
+- From admissions_filtered.txt & diag_proc_filtered.txt: create adm_dataset
+- From atd_filtered.txt: create atd_dataset
+- Dump 2 datasets into 2 separated pkl files: adm.pkl & atd.pkl
+
+Steps:
+- Create 3 dictionaries: 
+	+ diag_dict (encoding diagnosis in diag_proc and attendances)
+	+ proc_dict (encoding procedures in diag_proc)
+	+ medi_dict (encoding medications in medi)
+- Create 2 dictionaries: prvsp_dict & prcae_dict (medi uses prvsp_refno & diag_proc uses prcae_refno)
+	These two dicts are used for mapping diag, proc, medi into their admissions
+- Map diag, proc, medi into their admissions
+	After this step, we have adm_dataset containing information of all admissions.
+	Each admission has information of patnt_refno, admit_time, disch_time, method & a list its diag and a list of it's proc & medi
+- Create atd_dataset: 
+	Encode diagnosis of each attendance and then create the atd_dataset with the information of UR, arr_time, dep_time & code (code of diagnosis)
+	
+Script: combine_data.py
+
+II. CREATE PATIENT DATASET
+Steps:
+- Create 2 dictionaries:
+	+ patnt_dict (admissions use patnt_refno to identify the patients)
+	+ ur_dict (attendances use ur to identify the patients)
+	
+- Map admissions into their patients (use patnt_dict):
+	This step create for each patient a list of his/her admissions (list_adm)
+	
+- Map attendances into their patiens (use ur_dict):
+	This step create for each patien a list of his/her attendances (list_atd)
+	
+- Dump these 2 lists (list_adm & list_atd) to the file patnt.pkl
+
+Script: create_patnt_records.py
