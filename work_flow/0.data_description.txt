@@ -1,29 +1,29 @@
-1. patients.txt: each row is information of a patient
+1. patients.txt: each row is the information of a patient
 	- patnt_refno: a patient's unique ID
 	- UR: another kind of patient's ID
 	- patients' information: date of birth, gender, date of death, language, country,...
 	
-2. admissions.txt: each row is information of an admission
+2. admissions.txt: each row is the information of an admission
 	- pantnt_refno: patient's ID (the first column in the patients.txt table)
 	- prvsp_refno: unique admission ID
 	- prcae_refno: another kind of unique admission ID
 	- admit_dttm, disch_dttm: the admitted and dispatch time of an admission
 	- admission_method: indicate the admission methods such as: emergency, routine, newborn,...
 	
-3. attendances.txt: each row is information of an emergency attendance:
+3. attendances.txt: each row is the information of an emergency attendance:
 	- atd_id: emergency attendance's unique ED key
 	- UR: patient's UR (the second column in the patients.txt table)
 	- arrival_dttm, departure_dttm: the arrival and departure time of an attendance
 	- VEMD_ICD_code: ICD code for the diagnosis of an attendance
 	
-4. medications.txt: each row is information of a medication:
+4. medications.txt: each row is the information of a medication:
 	- PrescriptionID: a unique ID of the medication
 	- prvsp_refno: admission ID (the second column in the admissions.txt)
 	- UR: patient's UR (the second column in the patients.txt)
 	- Medication Name: names of medications. Each medication should be mapped to it's ATC code. 
 		Medication codes are listed in the file pbs_parsed.txt
 	
-5. diagnosis_procedures.txt: each row is information of a diagnosis or procedure
+5. diagnosis_procedures.txt: each row is the information of a diagnosis or procedure
 	- dgpro_refno: an ID
 	- prcae_refno: prcae_refno of corresponding admission (the third column in the admissions.txt)
 	- dptyp_code: DIAGN stands for diagnosis, PROCE stands for procedure
