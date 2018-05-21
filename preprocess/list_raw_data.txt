@@ -1,0 +1,5 @@
+admissions.txt
+attendances.txt
+diagnosis_procedures.txt
+medications.txt
+patients.txt
